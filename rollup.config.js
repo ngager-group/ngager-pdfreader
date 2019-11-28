@@ -1,6 +1,6 @@
 import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
-import image from 'rollup-plugin-image'
+import images from 'rollup-plugin-image-files'
 import external from 'rollup-plugin-peer-deps-external'
 import postcss from 'rollup-plugin-postcss'
 import resolve from 'rollup-plugin-node-resolve'
@@ -28,7 +28,6 @@ export default {
     postcss({
       modules: true
     }),
-    image(),
     url(),
     svgr(),
     babel({
@@ -36,6 +35,7 @@ export default {
       plugins: [ 'external-helpers' ]
     }),
     resolve(),
-    commonjs()
+    commonjs(),
+    images()
   ]
 }

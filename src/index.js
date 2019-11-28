@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-
 import styles from './styles.css'
 
 class PDF extends PureComponent {
@@ -86,6 +85,7 @@ class PDF extends PureComponent {
 
   renderIframe() {
     const { host, path } = this.props.viewer
+    const style = { width: '100%', height: '100%' }
     return (
       <iframe
         ref={el => {
@@ -94,7 +94,7 @@ class PDF extends PureComponent {
         className={this.props.popup ? styles.popupiframe : ''}
         frameBorder='0'
         allowFullScreen
-        style={{ width: '100%', height: '100%' }}
+        style={style}
         title='PDF Reader'
         src={`${host}${path}`}
       />
