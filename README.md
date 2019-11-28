@@ -26,6 +26,7 @@ class Example extends Component {
         downloadable
         onRequestClose={() => this.setState({ open: false })}
         onLastPage={() => console.log('onLastPage')}
+        onPageChanged={(currentPage) => console.log('currentPage', currentPage)}
       />
     )
   }

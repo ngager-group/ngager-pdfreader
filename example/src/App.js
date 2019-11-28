@@ -29,6 +29,7 @@ export default class App extends PureComponent {
           downloadable
           onRequestClose={() => this.setState({ open: false })}
           onLastPage={() => console.log('onLastPage')}
+          onPageChanged={(currentPage) => console.log('currentPage', currentPage)}
         />
       </div>
     )

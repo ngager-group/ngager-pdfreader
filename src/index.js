@@ -22,6 +22,9 @@ class PDF extends PureComponent {
   componentDidUpdate(prevProps, prevState) {
     const { currentPage, totalPages } = this.state
     if (prevState.totalPages !== totalPages || prevState.currentPage !== currentPage) {
+      if (prevState.currentPage !== currentPage) {
+        this.props.onPageChanged(currentPage)
+      }
       if (currentPage === totalPages) {
         this.props.onLastPage()
       }
@@ -136,6 +139,7 @@ PDF.propTypes = {
     PropTypes.string,
     PropTypes.instanceOf(Object)
   ]).isRequired,
+  onPageChanged: PropTypes.func,
   onLastPage: PropTypes.func,
   onRequestClose: PropTypes.func
 }
@@ -147,6 +151,7 @@ PDF.defaultProps = {
   },
   popup: false,
   downloadable: false,
+  onPageChanged: () => null,
   onRequestClose: () => null,
   onLastPage: () => null
 }
