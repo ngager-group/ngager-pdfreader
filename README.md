@@ -15,12 +15,18 @@ npm install --save ngager-pdfreader
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from 'ngager-pdfreader'
+import PDF from 'ngager-pdfreader'
 
 class Example extends Component {
   render () {
     return (
-      <MyComponent />
+      <PDF
+        popup
+        src="https://nclong87.github.io/file-example_PDF_500_kB.pdf"
+        downloadable
+        onRequestClose={() => this.setState({ open: false })}
+        onLastPage={() => console.log('onLastPage')}
+      />
     )
   }
 }

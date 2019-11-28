@@ -17,7 +17,7 @@ export default class App extends Component {
       <div>
         <PDF
           popup
-          src="https://file-examples.com/wp-content/uploads/2017/10/file-example_PDF_500_kB.pdf"
+          src="https://nclong87.github.io/file-example_PDF_500_kB.pdf"
           downloadable
           onRequestClose={() => this.setState({ open: false })}
           onLastPage={() => console.log('onLastPage')}
