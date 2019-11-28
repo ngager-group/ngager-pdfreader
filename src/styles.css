@@ -7,12 +7,23 @@
   font-size: 2em;
 }
 
-.popup {
+.popupContainer {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  display: flex;
+  background-color: #222222B3;
+}
+
+.popupContent {
+  display: flex;
+  flex: 1;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .popupiframe {

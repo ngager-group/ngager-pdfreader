@@ -11,14 +11,10 @@ class PDF extends PureComponent {
     }
     this.handleOnReceived = this.handleOnReceived.bind(this)
     this.handlePressEscape = this.handlePressEscape.bind(this)
-    this.handleOnClickBack = this.handleOnClickBack.bind(this)
+    this.handleClickOnPopupContainer = this.handleClickOnPopupContainer.bind(this)
   }
 
   componentDidMount() {
-    if (this.props.popup) {
-      window.history.pushState(null, null, window.location.href)
-      window.addEventListener('popstate', this.handleOnClickBack)
-    }
     window.addEventListener('message', this.handleOnReceived)
     document.addEventListener('keydown', this.handlePressEscape, false)
   }
@@ -35,13 +31,6 @@ class PDF extends PureComponent {
   componentWillUnmount() {
     window.removeEventListener('message', this.handleOnReceived, false)
     document.removeEventListener('keydown', this.handlePressEscape, false)
-    document.removeEventListener('popstate', this.handleOnClickBack, false)
-  }
-
-  handleOnClickBack(event) {
-    event.preventDefault()
-    event.stopPropagation()
-    this.props.onRequestClose()
   }
 
   handlePressEscape(e) {
@@ -52,6 +41,13 @@ class PDF extends PureComponent {
       if (typeof e.stopPropagation === 'function') {
         e.stopPropagation()
       }
+      this.props.onRequestClose()
+    }
+  }
+
+  handleClickOnPopupContainer(e) {
+    // console.log('handleClickOnPopupContainer', e.target)
+    if (e.target.className.indexOf('popupContainer') >= 0) {
       this.props.onRequestClose()
     }
   }
@@ -116,8 +112,15 @@ class PDF extends PureComponent {
   render() {
     if (this.props.popup) {
       return (
-        <div className={styles.popup}>
-          {this.renderIframe()}
+        <div
+          role='button'
+          tabIndex={0}
+          className={styles.popupContainer}
+          onClick={this.handleClickOnPopupContainer}
+        >
+          <div className={styles.popupContent}>
+            {this.renderIframe()}
+          </div>
         </div>
       )
     }

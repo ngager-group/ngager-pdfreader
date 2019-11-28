@@ -1,17 +1,25 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
 import PDF from 'ngager-pdfreader'
 
-export default class App extends Component {
+export default class App extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
       open: true
     }
+    console.log('constructor')
   }
+
+  componentWillReceiveProps() {
+    console.log('componentWillReceiveProps')
+  }
+
   render () {
     if (this.state.open === false) {
-      return null;
+      return (
+        <div><button onClick={() => this.setState({ open: true })}>Open PDF Reader</button></div>
+      );
     }
     return (
       <div>
