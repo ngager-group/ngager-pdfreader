@@ -11,9 +11,14 @@ class PDF extends PureComponent {
     }
     this.handleOnReceived = this.handleOnReceived.bind(this)
     this.handlePressEscape = this.handlePressEscape.bind(this)
+    this.handleOnClickBack = this.handleOnClickBack.bind(this)
   }
 
   componentDidMount() {
+    if (this.props.popup) {
+      window.history.pushState(null, null, window.location.href)
+      window.addEventListener('popstate', this.handleOnClickBack)
+    }
     window.addEventListener('message', this.handleOnReceived)
     document.addEventListener('keydown', this.handlePressEscape, false)
   }
@@ -28,8 +33,15 @@ class PDF extends PureComponent {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('message', this.handleOnReceived)
+    window.removeEventListener('message', this.handleOnReceived, false)
     document.removeEventListener('keydown', this.handlePressEscape, false)
+    document.removeEventListener('popstate', this.handleOnClickBack, false)
+  }
+
+  handleOnClickBack(event) {
+    event.preventDefault()
+    event.stopPropagation()
+    this.props.onRequestClose()
   }
 
   handlePressEscape(e) {
