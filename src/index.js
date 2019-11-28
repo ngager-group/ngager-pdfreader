@@ -91,6 +91,7 @@ class PDF extends PureComponent {
         ref={el => {
           this.iframe = el
         }}
+        className={this.props.popup ? styles.popupiframe : ''}
         frameBorder='0'
         allowFullScreen
         style={{ width: '100%', height: '100%' }}
