@@ -67,8 +67,9 @@ class PDF extends PureComponent {
       }
       switch (event.data.type) {
         case 'ready': {
+          const src = this.props.src
           const resource = {
-            src: this.props.src,
+            src: typeof src === 'object' ? URL.createObjectURL(src) : src,
             popup: this.props.popup,
             downloadable: this.props.downloadable
           }
