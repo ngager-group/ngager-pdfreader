@@ -9,6 +9,8 @@
 ```bash
 npm install --save ngager-pdfreader
 ```
+## Example
+https://ngager-group.github.io/ngager-pdfreader/
 
 ## Usage
 
