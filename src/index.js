@@ -72,6 +72,7 @@ class PDF extends PureComponent {
             popup: this.props.popup,
             downloadable: this.props.downloadable
           }
+          console.log('resource', resource)
           this.iframe.contentWindow.postMessage(resource, host)
           break
         }

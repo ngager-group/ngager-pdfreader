@@ -9,6 +9,10 @@ export default class App extends PureComponent {
       open: true
     }
     console.log('constructor')
+    this.viewer = {
+      host: 'http://localhost',
+      path: '/pdf/web/viewer.html',
+    };
   }
 
   componentWillReceiveProps() {
@@ -26,10 +30,11 @@ export default class App extends PureComponent {
         <PDF
           popup
           src="https://nclong87.github.io/file-example_PDF_500_kB.pdf"
-          downloadable
+          downloadable={false}
           onRequestClose={() => this.setState({ open: false })}
           onLastPage={() => console.log('onLastPage')}
           onPageChanged={(currentPage) => console.log('currentPage', currentPage)}
+          viewer={this.viewer}
         />
       </div>
     )
