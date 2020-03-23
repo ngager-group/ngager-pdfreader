@@ -6,13 +6,20 @@ export default class App extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      open: true
+      open: true,
+      downloadable: false,
     }
     console.log('constructor')
     this.viewer = {
       host: 'http://localhost',
       path: '/pdf/web/viewer.html',
     };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ downloadable: true });
+    }, 5000);
   }
 
   componentWillReceiveProps() {
@@ -30,7 +37,7 @@ export default class App extends PureComponent {
         <PDF
           popup
           src="https://nclong87.github.io/file-example_PDF_500_kB.pdf"
-          downloadable={false}
+          downloadable={this.state.downloadable}
           onRequestClose={() => this.setState({ open: false })}
           onLastPage={() => console.log('onLastPage')}
           onPageChanged={(currentPage) => console.log('currentPage', currentPage)}

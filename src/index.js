@@ -29,6 +29,13 @@ class PDF extends PureComponent {
         this.props.onLastPage()
       }
     }
+    if (prevProps.downloadable !== this.props.downloadable) {
+      const resource = {
+        downloadable: this.props.downloadable
+      }
+      const host = this.props.viewer.host
+      this.iframe.contentWindow.postMessage(resource, host)
+    }
   }
 
   componentWillUnmount() {
@@ -72,7 +79,6 @@ class PDF extends PureComponent {
             popup: this.props.popup,
             downloadable: this.props.downloadable
           }
-          console.log('resource', resource)
           this.iframe.contentWindow.postMessage(resource, host)
           break
         }
