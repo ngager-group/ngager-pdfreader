@@ -25,7 +25,7 @@ class PDF extends PureComponent {
       if (prevState.currentPage !== currentPage) {
         this.props.onPageChanged(currentPage)
       }
-      if (currentPage === totalPages) {
+      if (currentPage + 1 >= totalPages) {
         this.props.onLastPage()
       }
     }
