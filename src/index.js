@@ -25,9 +25,6 @@ class PDF extends PureComponent {
       if (prevState.currentPage !== currentPage) {
         this.props.onPageChanged(currentPage)
       }
-      if (currentPage + 1 >= totalPages) {
-        this.props.onLastPage()
-      }
     }
     if (prevProps.downloadable !== this.props.downloadable) {
       const resource = {
@@ -93,6 +90,13 @@ class PDF extends PureComponent {
         case 'pagechanging': {
           const { pageNumber } = event.data.data
           this.setState({ currentPage: pageNumber })
+          break
+        }
+        case 'pagerendered': {
+          const { pageNumber } = event.data.data
+          if (this.state.totalPages > 0 && pageNumber === this.state.totalPages) {
+            this.props.onLastPage()
+          }
           break
         }
         default:
