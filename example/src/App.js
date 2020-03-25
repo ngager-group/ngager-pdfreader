@@ -36,7 +36,7 @@ export default class App extends PureComponent {
       <div>
         <PDF
           popup
-          src="https://nclong87.github.io/file-example_PDF_500_kB.pdf"
+          src="https://nclong87.github.io/sample%20(1).pdf"
           downloadable={this.state.downloadable}
           onRequestClose={() => this.setState({ open: false })}
           onLastPage={() => console.log('onLastPage')}

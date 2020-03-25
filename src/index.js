@@ -6,9 +6,9 @@ class PDF extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      currentPage: 1,
-      totalPages: 0
+      currentPage: 1
     }
+    this.totalPages = 0
     this.handleOnReceived = this.handleOnReceived.bind(this)
     this.handlePressEscape = this.handlePressEscape.bind(this)
     this.handleClickOnPopupContainer = this.handleClickOnPopupContainer.bind(this)
@@ -20,11 +20,9 @@ class PDF extends PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { currentPage, totalPages } = this.state
-    if (prevState.totalPages !== totalPages || prevState.currentPage !== currentPage) {
-      if (prevState.currentPage !== currentPage) {
-        this.props.onPageChanged(currentPage)
-      }
+    const { currentPage } = this.state
+    if (prevState.currentPage !== currentPage) {
+      this.props.onPageChanged(currentPage)
     }
     if (prevProps.downloadable !== this.props.downloadable) {
       const resource = {
@@ -82,9 +80,9 @@ class PDF extends PureComponent {
         case 'close':
           this.props.onRequestClose()
           break
-        case 'pagesloaded': {
+        case 'documentloaded': {
           const { pagesCount } = event.data.data
-          this.setState({ totalPages: pagesCount })
+          this.totalPages = pagesCount
           break
         }
         case 'pagechanging': {
@@ -94,7 +92,7 @@ class PDF extends PureComponent {
         }
         case 'pagerendered': {
           const { pageNumber } = event.data.data
-          if (this.state.totalPages > 0 && pageNumber === this.state.totalPages) {
+          if (this.totalPages > 0 && pageNumber === this.totalPages) {
             this.props.onLastPage()
           }
           break
